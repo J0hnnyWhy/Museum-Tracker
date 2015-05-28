@@ -1,6 +1,7 @@
 require('capybara/rspec')
 require('./app')
 Capybara.app == Sinatra::Application
+set(:show_exceptions, false)
 
 describe('path for word_freq', {:type => :feature}) do
   it('processes the user entry to find how many times their word is in the string') do

@@ -1,5 +1,9 @@
 require('rspec')
-require('word_freq')
+require "pry"
+require('rps')
+require "capybara/rspec"
+require "./app"
+Capybara.app = Sinatra::Application
 
 describe('String#word_freq') do
   it("takes the users string and splits it into individual words that are pushed into a hash")
