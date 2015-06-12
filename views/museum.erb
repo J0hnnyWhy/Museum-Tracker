@@ -2,12 +2,13 @@
 <br>
   <ul>
    <% @museum.artworks.each do |art| %>
-    <li> <%= art.description %> <form action='/' method='post'>
+    <li> <%= art.description %> <form action='/museums/:id' method='post'>
       <input name='_method' type='hidden' value='delete'>
-      <input id='art_id' name='art_id' type='hidden' value='<%= art.id %>'>
+      <input id='art' name='art' type='hidden' value='<%= @art.id %>'>
 
       <button type="submit" class='btn btn-danger'>Delete this Artwork</button>
     </form></li>
+
     <% end %>
   </ul>
 <br>

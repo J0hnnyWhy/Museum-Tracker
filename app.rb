@@ -1,6 +1,7 @@
 require('sinatra')
 require('sinatra/reloader')
 require('./lib/museum')
+require('./lib/artwork')
 require('pry')
 
 also_reload('lib/**/*.rb')
@@ -29,9 +30,11 @@ end
 post('/museums/:id') do
   museum_id = params.fetch('museum_id').to_i()
   description = params.fetch('description')
-  artwork = Artwork.new({:description => description, :museum_id => museum_id})
+  id = params.fetch('id').to_i
+  artwork = Artwork.new({:description => description, :museum_id => museum_id, :id => id})
   artwork.save()
-  redirect back
+  @museum = Museum.find(id)
+  erb(:museum)
 end
 
 patch('/museums/:id') do
@@ -46,4 +49,10 @@ delete('/') do
   @museum.delete
   @museums = Museum.all
   erb(:index)
+end
+
+delete('/museums/:id') do
+  @art = Artwork.find(params.fetch("art_id").to_i)
+  @art.delete
+  redirect back
 end
