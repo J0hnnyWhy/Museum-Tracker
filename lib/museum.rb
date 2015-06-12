@@ -1,5 +1,5 @@
 class Museum
-  attr_reader(:name)
+  attr_reader(:name, :id)
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
@@ -13,5 +13,14 @@ class Museum
       museums.push(Museum.new({:name => name}))
     end
     museums
+  end
+
+  define_method(:save) do
+    result = DB.exec("INSERT INTO museums (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch('id').to_i()
+  end
+
+  define_method(:==) do |another_list|
+    self.name().==(another_list.name()).&(self.id().==(another_list.id()))
   end
 end
