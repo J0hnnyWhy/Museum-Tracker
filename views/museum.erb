@@ -1,0 +1,49 @@
+<h2>Here are the Artworks for: <%= @museum.name %></h2>
+<br>
+  <ul>
+   <% @museum.artworks.each do |art| %>
+    <li> <%= art.description %> <form action='/' method='post'>
+      <input name='_method' type='hidden' value='delete'>
+      <input id='art_id' name='art_id' type='hidden' value='<%= art.id %>'>
+
+      <button type="submit" class='btn btn-danger'>Delete this Artwork</button>
+    </form></li>
+    <% end %>
+  </ul>
+<br>
+<form action='/museums/:id' method='post'>
+
+  <input id='museum_id' name='museum_id' type='hidden' value='<%= @museum.id %>'>
+
+  <label for='description'>Add Artwork to this Museum</label>
+
+  <input id = 'description' name='description' type='text' required="true">
+  <button type='submit' class='btn btn-info'>Add</button>
+
+
+</form>
+<br><br><br><br>
+<div class="form-group">
+
+
+    <form action='/museums/ <%= @museum.id %>' method='post'>
+      <input name='_method' type='hidden' value='patch'>
+
+      <label for='name'> Rename Your Museum:</label>
+      <input id='name' name='name' type='text' required="true">
+
+      <button type='submit' class='btn btn-info'> Update </button>
+
+    </form>
+</div
+
+<div class="container">
+<form action='/' method='post'>
+  <input name='_method' type='hidden' value='delete'>
+  <input id='id' name='id' type='hidden' value='<%= @museum.id %>'>
+
+  <button type="submit" class='btn btn-danger'>Delete Museum</button>
+</form>
+</div>
+<br><br><br><br><br><br><br>
+<a href="/">Home Page</a>

@@ -38,9 +38,9 @@ describe(Museum) do
     it('returns an array of artworks for that list') do
       test_museum = Museum.new({:name => 'Epicodus stuff', :id => nil})
       test_museum.save()
-      test_artwork = Artwork.new({:description => 'paper clip', :museum_id => test_museum.id()})
+      test_artwork = Artwork.new({:description => 'paper clip', :museum_id => test_museum.id(), :id => nil})
       test_artwork.save()
-      test_artwork2 = Artwork.new({:description => 'booger', :museum_id => test_museum.id()})
+      test_artwork2 = Artwork.new({:description => 'booger', :museum_id => test_museum.id(), :id => nil})
       test_artwork2.save()
       expect(test_museum.artworks()).to(eq([test_artwork, test_artwork2]))
     end
@@ -68,9 +68,9 @@ describe(Museum) do
   it("deletes a museum's artworks from the database") do
     museum = Museum.new({:name => 'White House', :id => nil})
     museum.save
-    artwork = Artwork.new({:description => 'bottle cap', :museum_id => museum.id})
+    artwork = Artwork.new({:description => 'bottle cap', :museum_id => museum.id, :id => nil})
     artwork.save
-    artwork2 = Artwork.new({:description => "melted icecube", :museum_id => museum.id})
+    artwork2 = Artwork.new({:description => "melted icecube", :museum_id => museum.id, :id => nil})
     artwork2.save
     museum.delete
     expect(Artwork.all).to(eq([]))
