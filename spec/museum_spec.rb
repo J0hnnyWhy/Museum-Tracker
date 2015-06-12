@@ -25,14 +25,27 @@ describe(Museum) do
   end
 
   describe('.find') do
-  it('returns a museu by its id') do
-    test_museum = Museum.new({:name => 'Old House', :id => nil})
-    test_museum.save()
-    test_museum2 = Museum.new({:name => 'Cool Place', :id => nil})
-    test_museum2.save()
-    expect(Museum.find(test_museum.id())).to(eq(test_museum))
+    it('returns a museu by its id') do
+      test_museum = Museum.new({:name => 'Old House', :id => nil})
+      test_museum.save()
+      test_museum2 = Museum.new({:name => 'Cool Place', :id => nil})
+      test_museum2.save()
+      expect(Museum.find(test_museum.id())).to(eq(test_museum))
+    end
   end
-end
+
+  describe('#artworks') do
+    it('returns an array of artworks for that list') do
+      test_museum = Museum.new({:name => 'Epicodus stuff', :id => nil})
+      test_museum.save()
+      test_artwork = Artwork.new({:description => 'paper clip', :museum_id => test_museum.id()})
+      test_artwork.save()
+      test_artwork2 = Artwork.new({:description => 'booger', :museum_id => test_museum.id()})
+      test_artwork2.save()
+      expect(test_museum.artworks()).to(eq([test_artwork, test_artwork2]))
+    end
+  end
+
 
 
 end
