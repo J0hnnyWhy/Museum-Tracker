@@ -46,6 +46,36 @@ describe(Museum) do
     end
   end
 
+  describe('#update') do
+    it('lets you update a museum in the database') do
+      museum = Museum.new({:name => "Home of old stuff",  :id => nil})
+      museum.save
+      museum.update({:name => "dog house"})
+      expect(museum.name).to(eq('dog house'))
+    end
+  end
+
+  describe('#delete') do
+  it('lets you delete a museum from the database') do
+    museum = Museum.new({:name => 'White House', :id => nil})
+    museum.save
+    museum2 = Museum.new({:name => 'House Stuff', :id => nil})
+    museum2.save
+    museum.delete
+    expect(Museum.all).to(eq([museum2]))
+  end
+
+  it("deletes a museum's artworks from the database") do
+    museum = Museum.new({:name => 'White House', :id => nil})
+    museum.save
+    artwork = Artwork.new({:description => 'bottle cap', :museum_id => museum.id})
+    artwork.save
+    artwork2 = Artwork.new({:description => "melted icecube", :museum_id => museum.id})
+    artwork2.save
+    museum.delete
+    expect(Artwork.all).to(eq([]))
+    end
+  end
 
 
 end
