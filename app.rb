@@ -1,11 +1,11 @@
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/xxxxx')
+require('./lib/museum')
 
 also_reload('lib/**/*.rb')
 require('pg')
 
-DB = PG.connect({:dbname => "xxxxxxx"})
+DB = PG.connect({:dbname => "musuem_tracker"})
 
 
 get('/') do
