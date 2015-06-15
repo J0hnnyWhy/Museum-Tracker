@@ -8,7 +8,7 @@ also_reload('lib/**/*.rb')
 require('pg')
 
 DB = PG.connect({:dbname => "museum_tracker"})
-
+require('pry')
 
 get('/') do
   @museums = Museum.all
@@ -17,8 +17,8 @@ end
 
 post('/') do
   name = params.fetch("name")
-  new_museum = Museum.new({:name => name, :id => nil})
-  new_museum.save
+  @museum = Museum.new({:name => name, :id => nil})
+  @museum.save
   redirect back
 end
 
@@ -28,18 +28,20 @@ get('/museums/:id') do
 end
 
 post('/museums/:id') do
-  museum_id = params.fetch('museum_id').to_i()
+  @museum = Museum.find(params.fetch('id').to_i)
+  museum_id = @museum.id
   description = params.fetch('description')
-  id = params.fetch('id').to_i
-  artwork = Artwork.new({:description => description, :museum_id => museum_id, :id => id})
-  artwork.save()
-  @museum = Museum.find(id)
+  @artwork = Artwork.new({:description => description, :museum_id => museum_id, :id => nil})
+  @artwork.save()
+
+
   erb(:museum)
 end
 
 patch('/museums/:id') do
   name = params.fetch('name')
   @museum = Museum.find(params.fetch('id').to_i)
+
   @museum.update({:name => name})
   erb(:museum)
 end
@@ -51,8 +53,18 @@ delete('/') do
   erb(:index)
 end
 
+get('/artworks/:id') do 
+  @artwork = Artwork.find(params.fetch('id').to_i)
+  @museum = Museum.find(@artwork.museum_id)
+  erb(:artwork)
+end
+
 delete('/museums/:id') do
-  @art = Artwork.find(params.fetch("art_id").to_i)
-  @art.delete
-  redirect back
+  x = params.fetch('a_id').to_i
+  @artwork = Artwork.find(x)
+  y = @artwork.museum_id
+  @artwork.delete
+  @museum = Museum.find(y)
+  erb(:museum)
+
 end

@@ -3,14 +3,14 @@
 <br>
 <h3>Here are your current Museums:</h3>
 <br>
-<h4>Click on a Museum to edit it or view it's contents</h4>
+
 <ul>
 
   <% @museums.each do |museum| %>
-  <li><a href="/museums/<%= museum.id %>"><%= museum.name %><a/></li>
+  <li><a href="/museums/<%= museum.id %>"><%= museum.name %></a></li>
   <% end %>
 </ul>
-
+<h4>Click on a Museum to edit it or view it's contents</h4>
 <br>
 
 

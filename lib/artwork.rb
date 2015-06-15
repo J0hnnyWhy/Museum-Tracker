@@ -20,19 +20,19 @@ class Artwork
   end
 
   define_method(:save) do
-    result = DB.exec('INSERT INTO artworks (description, museum_id) VALUES (#{@description}, #{@museum_id}) RETURNING id;')
+    result = DB.exec("INSERT INTO artworks (description, museum_id) VALUES ('#{@description}', #{@museum_id}) RETURNING ID;")
     @id = result.first().fetch('id').to_i()
   end
 
   define_method(:==) do |another_artwork|
-    self.description().==(another_artwork.description()).&(self.museum_id().==(another_artwork.museum_id()))
+    self.description().==(another_artwork.description()).&(self.id().==(another_artwork.id()))
   end
 
   define_singleton_method(:find) do |id|
     found_art = nil
     Artwork.all().each() do |art|
       if art.id().==(id)
-        found_art= art
+        found_art = art
       end
     end
     found_art

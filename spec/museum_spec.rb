@@ -2,10 +2,10 @@ require("spec_helper")
 
 describe(Museum) do
   describe(".all") do
-    # it("empty at first and until an object is saved") do
-    #   museum2 = Museum.new({:name => 'new place', :id => nil})
-    #   expect(Museum.all()).to(eq([]))
-    # end
+    it("empty at first and until an object is saved") do
+      museum2 = Museum.new({:name => 'new place', :id => nil})
+      expect(Museum.all()).to(eq([]))
+    end
   end
 
   describe("#save") do
@@ -36,11 +36,11 @@ describe(Museum) do
 
   describe('#artworks') do
     it('returns an array of artworks for that list') do
-      test_museum = Museum.new({:name => 'Epicodus stuff', :id => nil})
+      test_museum = Museum.new({:name => 'Epicodus stuff', :id => 1})
       test_museum.save()
-      test_artwork = Artwork.new({:description => 'paper clip', :museum_id => test_museum.id(), :id => nil})
+      test_artwork = Artwork.new({:description => 'paper clip', :museum_id => test_museum.id(), :id => 1})
       test_artwork.save()
-      test_artwork2 = Artwork.new({:description => 'booger', :museum_id => test_museum.id(), :id => nil})
+      test_artwork2 = Artwork.new({:description => 'booger', :museum_id => test_museum.id(), :id => 1})
       test_artwork2.save()
       expect(test_museum.artworks()).to(eq([test_artwork, test_artwork2]))
     end

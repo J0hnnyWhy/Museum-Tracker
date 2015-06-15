@@ -39,7 +39,8 @@ class Museum
     artworks.each() do |artwork|
       description = artwork.fetch('description')
       museum_id = artwork.fetch('museum_id').to_i()
-      museum_artworks.push(Artwork.new({:description => description, :museum_id => museum_id}))
+      id = artwork.fetch('id').to_i
+      museum_artworks.push(Artwork.new({:description => description, :museum_id => museum_id, :id => id}))
     end
     museum_artworks
   end

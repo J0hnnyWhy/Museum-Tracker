@@ -1,0 +1,11 @@
+body {
+  background-color: #505050;
+  color: gray;
+}
+h1, h2, h3, h4 {
+  text-align: left;
+  color: #90FF00;
+}
+a:link {
+    color: #99FF00;
+}
